@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ActivityCard from "../components/ActivityCard.svelte";
   import { onMount, onDestroy } from "svelte";
   import Layout from "./__layout.svelte";
   import { Motion } from 'svelte-motion'
@@ -66,40 +67,6 @@ const item = {
   let loading = true;
   let vidRef: HTMLVideoElement;
 
-  
-  onMount(async () => {
-    const ID = "1137623908263141426";
-
-    try {
-      const socket = new WebSocket('wss://api.lanyard.rest/socket');
-
-      await new Promise((resolve) => {
-        socket.addEventListener('open', resolve);
-      });
-
-      const subscribePayload = JSON.stringify({
-        op: 'subscribe',
-        d: { user_id: ID },
-      });
-
-      socket.send(subscribePayload);
-
-      socket.addEventListener('message', (event) => {
-        const message = JSON.parse(event.data);
-
-        if (message.op === 'init') {
-          // Initial response, you can handle it as needed
-        } else if (message.op === 'presence_update') {
-          // Handle presence update
-          data = message.d;
-          loading = false;
-          console.log("socket connected")
-        }
-      });
-    } catch (error) {
-      console.error('Error with WebSocket:', error);
-    }
-  });
 
   async function ManualFetch() {
     const ID = "1137623908263141426";
@@ -117,6 +84,64 @@ const item = {
       console.error("Error fetching data:", error);
     }
   }
+
+onMount(async () => {
+  const ID = "1137623908263141426";
+
+  function connectWebSocket() {
+    try {
+      const socket = new WebSocket('wss://api.lanyard.rest/socket');
+
+      socket.addEventListener('open', async () => {
+        // Send Opcode 2: Initialize after the connection is opened
+        const initializePayload = JSON.stringify({
+          op: 2,
+          d: {
+            subscribe_to_ids: [ID]
+          }
+        });
+        socket.send(initializePayload);
+      });
+
+      socket.addEventListener('close', (event) => {
+        console.log('WebSocket connection closed:', event.code, event.reason);
+        console.log("Starting a new one asap ✅");
+        // Automatically reconnect after a delay
+        setTimeout(connectWebSocket, 1000); // Adjust delay as needed
+      });
+
+      socket.addEventListener('message', (event) => {
+        const message = JSON.parse(event.data);
+
+        if (message.op === 1) {
+          // Handle Hello message (Opcode 1)
+          // This message contains heartbeat_interval, but we're not using it in this example
+        } else if (message.op === 0) {
+          // Handle Event message (Opcode 0)
+          if (message.t === 'INIT_STATE') {
+            ManualFetch();
+            // Here you can update your UI or perform other actions based on the received presence data
+          } else if (message.t === 'PRESENCE_UPDATE') {
+            // Handle PRESENCE_UPDATE event
+            data = message.d;
+            // Here you can update your UI or perform other actions based on the received presence update
+          }
+        }
+      });
+
+      socket.addEventListener('error', (error) => {
+        console.error('WebSocket error:', error);
+      });
+    } catch (error) {
+      console.error('Error with WebSocket:', error);
+    }
+  }
+
+  connectWebSocket();
+});
+
+ 
+ 
 
   onMount(() => {
   
@@ -136,7 +161,7 @@ const item = {
     >
       {#if loading}
         <p>Fetching...</p>
-      {:else if data}
+      {:else if data && data.discord_user}
         <div>
           <div class="flex flex-row items-center mb-[20px] mt-[20px]">
             <img
@@ -293,25 +318,8 @@ const item = {
   <div
     class="fixed top-0 left-0 w-full h-full -z-0 opacity-60 flex justify-center items-center"
   >
-    <video
-      autoPlay
-      loop
-      muted
-      class="fixed w-auto min-w-full min-h-full max-w-none blur-md object-contain"
-      bind:this={vidRef}
-    >
-      <source
-        src="https://cdn.discordapp.com/attachments/1145373333962108988/1193415324050141214/Radiohead_-_Jigsaw_Falling_Into_Place.mp4?ex=65aca1a1&is=659a2ca1&hm=f6068a1d95521df3e4c699a2a899f581b4f04f42f8e414a7c73cadaca6d0b51d&"
-        type="video/mp4"
-      />
-      <track
-        src="captions_en.vtt"
-        kind="captions"
-        srclang="en"
-        label="english_captions"
-      />
-      Your browser does not support the video tag.
-    </video>
+    <img class="fixed w-auto min-w-full min-h-full max-w-none blur-md object-contain" alt="bg" src="https://cdn.discordapp.com/attachments/1183485427596939294/1211408751026905088/571613_qwertfx_attempt-at-pixel-art-745813473.gif?ex=65ee1751&is=65dba251&hm=afe9b7c1816b17376bf48f13ba1d2ccac065c3781b0c05bb739eb3ca46c77889&"/>
+
   </div>
 </Layout>
 
