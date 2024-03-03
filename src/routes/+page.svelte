@@ -162,8 +162,8 @@ onMount(async () => {
       {#if loading}
         <p>Fetching...</p>
       {:else if data && data.discord_user}
-        <div>
-          <div class="flex flex-row items-center mb-[20px] mt-[20px]">
+        <div >
+          <div class="flex flex-row items-center mb-[20px] mt-[20px] bg-black/40 p-3 rounded-lg">
             <img
               src={"https://cdn.discordapp.com/avatars" +
                 "/" +
@@ -196,6 +196,7 @@ onMount(async () => {
                         ? "Idle"
                         : "Offline"}
                 </h1>
+               
               </div>
 
               <div class="flex flex-row items-center">
@@ -207,7 +208,9 @@ onMount(async () => {
                   class="active:scale-[.85] ease-linear transition-all duration-100 hover:text-[#999] ml-[5px] px-[10px] bg-slate-00/50 hover:bg-[#34343c]/50 rounded-[4px] text-[#7b7b7b]"
                   ><i class="fa-solid fa-copy"></i></button
                 >
+                
               </div>
+              
               {#if data.activities?.["0"] !== undefined && data.activities?.["0"].name !== "Spotify" && data.activities["0"].state != undefined}
                 <p>{data.activities["0"].state}</p>
               {:else if data.activities?.["0"] !== undefined && data.activities["0"].state == undefined}
@@ -217,13 +220,13 @@ onMount(async () => {
               {/if}
             </div>
           </div>
-          <div class="mt-[10px] h-[1px] w-full bg-[#797979]/80"></div>
-          <div class="flex flex-row items-center mt-[10px]">
-            <Motion let:motion variants={item} initial={{y: 20, opacity: 0, filter: "blur(10px)"}} animate={{y: 0, opacity: 1, filter: "blur(0px)"}}>
+          <div class="flex flex-row items-center mt-[5px] bg-black/40 p-[3px] rounded-lg">
+            <div class=""> <Motion let:motion variants={item} initial={{y: 20, opacity: 0, filter: "blur(10px)"}} animate={{y: 0, opacity: 1, filter: "blur(0px)"}}>
             </Motion>
-            <button class="ml-[10px] p-[5px] px-[10px] bg-black/40 rounded-lg active:scale-[.85] ease-linear transition-all duration-100 hover:bg-red-600/40"><i class="fa-solid fa-star mr-[5px] text-red-500"></i>Activities</button>
-            <button class="ml-[10px] p-[5px] px-[10px] bg-black/40 rounded-lg active:scale-[.85] ease-linear transition-all duration-100 hover:bg-green-600/40"><i class="fa-brands fa-readme mr-[5px] text-green-500"></i>About</button>
-            <button class="ml-[10px] p-[5px] px-[10px] bg-black/40 rounded-lg active:scale-[.85] ease-linear transition-all duration-100 hover:bg-blue-600/40"><i class="fa-solid fa-folder mr-[5px] text-blue-500"></i>Projects</button>
+            <button class=" p-[5px] px-[10px] bg-black/40 rounded-lg active:scale-[.85] ease-linear transition-all duration-100 hover:bg-red-600/40"><i class="fa-solid fa-star mr-[5px] text-red-500"></i>Activities</button>
+            <button class="ml-[5px] p-[5px] px-[10px] bg-black/40 rounded-lg active:scale-[.85] ease-linear transition-all duration-100 hover:bg-green-600/40"><i class="fa-brands fa-readme mr-[5px] text-green-500"></i>About</button>
+            <button class="ml-[5px] p-[5px] px-[10px] bg-black/40 rounded-lg active:scale-[.85] ease-linear transition-all duration-100 hover:bg-blue-600/40"><i class="fa-solid fa-folder mr-[5px] text-blue-500"></i>Projects</button>
+          </div>
           </div>
           {#if data.spotify !== null}
             <div
@@ -316,7 +319,7 @@ onMount(async () => {
   </div>
 
   <div
-    class="fixed top-0 left-0 w-full h-full -z-0 opacity-60 flex justify-center items-center"
+    class="fixed top-0 left-0 w-full h-full -z-0 opacity-90 flex justify-center items-center"
   >
     <img class="fixed w-auto min-w-full min-h-full max-w-none blur-md object-contain" alt="bg" src="https://cdn.discordapp.com/attachments/1183485427596939294/1211408751026905088/571613_qwertfx_attempt-at-pixel-art-745813473.gif?ex=65ee1751&is=65dba251&hm=afe9b7c1816b17376bf48f13ba1d2ccac065c3781b0c05bb739eb3ca46c77889&"/>
 
