@@ -1,50 +1,87 @@
+<script lang="ts">
+  import { Motion } from "svelte-motion";
 
-<script>
-  import { Motion } from 'svelte-motion';
+  let hoverStates: { [key: string]: boolean } = {};
+  let selectedTab: string; 
+  let hoveredTab: string; 
+  const handleMouseEnter = (tabName: string) => {
+    hoverStates[tabName] = true;
+    hoveredTab = tabName; 
+    console.log(`${tabName} - Mouse entered`);
+  };
+
+  const handleMouseLeave = (tabName: string) => {
+    hoverStates[tabName] = false;
+    hoveredTab = '';
+    console.log(`${tabName} - Mouse left`);
+  };
+
+  const variants = {
+    open: { x: 0, opacity: 1, filter: "blur(0px)" },
+    closed: { x: -20, opacity: 0, filter: "blur(0px)" },
+  };
 
   const item = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1 }
+    visible: { y: 0, opacity: 1 },
   };
+
+  export let activeTab = "activities";
+  export let setActiveTab: (tab: string) => void;
+
+  const tabDetails = [
+    { name: "activities", icon: "fa-solid fa-rocket" },
+    { name: "About", icon: "fa-solid fa-heart" },
+    { name: "gfdfg", icon: "fa-solid fa-heart" },
+    { name: "dfgdfg", icon: "fa-solid fa-heart" },
+   
+  ];
+
+  function changeTab(tab: string) {
+    setActiveTab(tab);
+    selectedTab = tab; 
+  }
 </script>
 
 <div class="space-x-3 flex flex-row">
-  <Motion let:motion variants={item} initial={{y: 20, opacity: 0, filter: "blur(10px)"}} animate={{y: 0, opacity: 1, filter: "blur(0px)"}} transition={{ delay: 0.1 }}>
-    <button use:motion class="h-[34px] item p-[5px] px-[10px] bg-slate-900/40 rounded-lg active:scale-[.85] ease-linear transition-all duration-100 hover:bg-indigo-900/40 group/button flex flex-row justify-center items-center hover:px-4 ">
-       <i class="fa-solid fa-rocket mx-[5px] text-[#4d4d4d] group-hover/button:text-[#764ADE] transition-all"> </i>
-       <Motion let:motion variants={item} initial={{y: 20, opacity: 0, filter: "blur(10px)"}} animate={{y: 0, opacity: 1, filter: "blur(0px)"}}>
-            <h1 class="roboto-regular hidden group-hover/button:block transition-all">Activities</h1>
-       </Motion>
-     
-    </button>
-  </Motion>
-   <Motion let:motion variants={item} initial={{y: 20, opacity: 0, filter: "blur(10px)"}} animate={{y: 0, opacity: 1, filter: "blur(0px)"}} transition={{ delay: 0.2 }}>
-    <button use:motion class="item p-[5px] px-[10px] bg-slate-900/40 rounded-lg active:scale-[.85] ease-linear transition-all duration-100 hover:bg-indigo-900/40 group/button flex flex-row justify-center items-center hover:px-4">
-       <i class="fa-solid fa-circle-user mx-[5px] text-[#4d4d4d] group-hover/button:text-[#764ADE]"> </i>
-       <Motion let:motion variants={item} initial={{y: 20, opacity: 0, filter: "blur(10px)"}} animate={{y: 0, opacity: 1, filter: "blur(0px)"}}>
-            <h1 class="roboto-regular hidden group-hover/button:block">About</h1>
-       </Motion>
-     
-    </button>
-  </Motion>
-   <Motion let:motion variants={item} initial={{y: 20, opacity: 0, filter: "blur(10px)"}} animate={{y: 0, opacity: 1, filter: "blur(0px)"}} transition={{ delay: 0.3 }}>
-    <button use:motion class="item p-[5px] px-[10px] bg-slate-900/40 rounded-lg active:scale-[.85] ease-linear transition-all duration-100 hover:bg-indigo-900/40 group/button flex flex-row justify-center items-center hover:px-4">
-       <i class="fa-solid fa-layer-group mx-[5px] text-[#4d4d4d] group-hover/button:text-[#764ADE]"> </i>
-       <Motion let:motion variants={item} initial={{y: 20, opacity: 0, filter: "blur(10px)"}} animate={{y: 0, opacity: 1, filter: "blur(0px)"}}>
-            <h1 class="roboto-regular hidden group-hover/button:block">Projects</h1>
-       </Motion>
-     
-    </button>
-  </Motion>
-   <Motion let:motion variants={item} initial={{y: 20, opacity: 0, filter: "blur(10px)"}} animate={{y: 0, opacity: 1, filter: "blur(0px)"}} transition={{ delay: 0.4 }}>
-    <button use:motion class="item p-[5px] px-[10px] bg-slate-900/40 rounded-lg active:scale-[.85] ease-linear transition-all duration-100 hover:bg-indigo-900/40 group/button flex flex-row justify-center items-center hover:px-4">
-       <i class="fa-solid fa-envelope mx-[5px] text-[#4d4d4d] group-hover/button:text-[#764ADE]"> </i>
-       <Motion let:motion variants={item} initial={{y: 20, opacity: 0, filter: "blur(10px)"}} animate={{y: 0, opacity: 1, filter: "blur(0px)"}}>
-            <h1 class="roboto-regular hidden group-hover/button:block">Contacts</h1>
-       </Motion>
-     
-    </button>
-  </Motion>
+  {#each tabDetails as tab, index}
+    <Motion
+      let:motion
+      variants={item}
+      initial={{ y: 20, opacity: 0, filter: "blur(10px)" }}
+      animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+      transition={{ delay: index * 0.1 }}>
+      <button
+        use:motion
+        on:mouseenter={() => handleMouseEnter(tab.name)}
+        on:mouseleave={() => handleMouseLeave(tab.name)}
+        class:selected={activeTab === tab.name}
+        class:hovered={(hoveredTab === tab.name || activeTab === tab.name) && activeTab !== tab.name}
+        on:click={() => changeTab(tab.name)}
+        class="h-[34px] item p-[5px] px-[10px] rounded-lg active:scale-[.85] ease-linear transition-all duration-100 group/button flex flex-row justify-center items-center hover:px-4"
+        style={`background-color: ${((hoveredTab === tab.name || activeTab === tab.name) && activeTab === tab.name) ? '#764ADE40' : '#0F172A66'}`}
+      >
+        <i
+          class={`fa-solid ${tab.icon} mx-[5px] text-[#4d4d4d] transition-all group-hover/button:text-[#764ADE] ${(hoveredTab === tab.name || activeTab === tab.name) && activeTab === tab.name ? 'text-[#764ADE]' : ''}`}
+        ></i>
+        {#if hoverStates[tab.name] }
+          <Motion
+            let:motion
+            {variants}
+            initial={{ x: -20, opacity: 0, filter: "blur(10px)" }}
+            animate={ activeTab === tab.name ? "open" : "open"}
+            transition={{ duration: 0.1 }}
+          >
+            <h1 use:motion class="roboto-regular transition-all">
+              {hoveredTab}
+            </h1>
+          </Motion>
+        {:else}
+          <span></span>
+           {#if activeTab === tab.name} <h1 class="roboto-regular">{tab.name}</h1> 
+          {/if}
+        {/if}
+      </button>
+    </Motion>
+  {/each}
 </div>
-
-

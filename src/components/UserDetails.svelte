@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {Motion} from "svelte-motion"
   import type { LanyardData } from "../routes/+page.svelte"
    export let data: LanyardData;
    function copy() {
@@ -7,7 +8,7 @@
   }
  
 </script>
- <h1 class="text-[#764ADE] roboto-regular"> <i class="fa-solid fa-caret-down"/> ACTIVITIES</h1>
+ <h1 class="ml-[20px] text-[#764ADE] roboto-regular"> <i class="fa-solid fa-caret-down overflow-hidden hover:rotate-[360deg] transition-all"/> ACTIVITIES</h1>
 <div class="flex flex-row items-center mb-[20px] bg-black/40 p-3 rounded-lg  mt-[20px]">
  
   <div class="flex flex-row items-center mb-[20px] bg-black/40 p-3 rounded-lg  mt-[20px]">
@@ -68,3 +69,4 @@
             </div>
           </div>
 </div>
+
