@@ -1,4 +1,5 @@
 <script>
+    import "@fontsource/roboto"
     import "../style.css"
     import '@fortawesome/fontawesome-free/css/all.min.css'
 </script>

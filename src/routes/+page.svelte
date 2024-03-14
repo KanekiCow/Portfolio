@@ -65,7 +65,7 @@
   import About from "../components/About.svelte";
   import { onMount } from "svelte";
   import UserDetails from "../components/UserDetails.svelte";
-  import Layout from "./__layout.svelte";
+  import Layout from "./+layout.svelte";
   import ActivityButtons from "../components/ActivityButtons.svelte";
   import Cards from "../components/Cards.svelte";
   import { Motion } from "svelte-motion";

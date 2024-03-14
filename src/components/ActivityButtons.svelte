@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Motion } from "svelte-motion";
-  import tabSwitchSound from "../components/sound/button-124476.mp3";
+  import tabSwitchSound from "../../src/button-124476.mp3";
 
   let hoverStates: { [key: string]: boolean } = {};
   let selectedTab: string; 

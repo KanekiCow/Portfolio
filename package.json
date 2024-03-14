@@ -25,6 +25,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource/roboto": "^5.0.12",
 		"@fortawesome/fontawesome-free": "^6.5.1",
 		"@sveltejs/adapter-vercel": "^5.1.0",
 		"typed.js": "^2.1.0",
