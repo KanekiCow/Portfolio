@@ -1,9 +1,13 @@
 <script lang="ts">
   import { Motion } from "svelte-motion";
+  import tabSwitchSound from "../components/sound/button-124476.mp3";
 
   let hoverStates: { [key: string]: boolean } = {};
   let selectedTab: string; 
   let hoveredTab: string; 
+
+  const tabSwitchSoundInstance = new Audio(tabSwitchSound);
+
   const handleMouseEnter = (tabName: string) => {
     hoverStates[tabName] = true;
     hoveredTab = tabName; 
@@ -26,20 +30,22 @@
     visible: { y: 0, opacity: 1 },
   };
 
-  export let activeTab = "activities";
+  export let activeTab = "Activities";
   export let setActiveTab: (tab: string) => void;
 
   const tabDetails = [
-    { name: "activities", icon: "fa-solid fa-rocket" },
-    { name: "About", icon: "fa-solid fa-heart" },
-    { name: "gfdfg", icon: "fa-solid fa-heart" },
-    { name: "dfgdfg", icon: "fa-solid fa-heart" },
-   
+    { name: "Activities", icon: "fa-solid fa-rocket" },
+    { name: "About", icon: "fa-solid fa-circle-user" },
+    { name: "Projects", icon: "fa-solid fa-layer-group" },
+    { name: "Contacts", icon: "fa-solid fa-envelope" },
   ];
 
   function changeTab(tab: string) {
-    setActiveTab(tab);
-    selectedTab = tab; 
+    if (tab !== activeTab) {
+      setActiveTab(tab);
+      selectedTab = tab;
+      tabSwitchSoundInstance.play();
+    }
   }
 </script>
 

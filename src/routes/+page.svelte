@@ -62,6 +62,7 @@
 </script>
 
 <script lang="ts">
+  import About from "../components/About.svelte";
   import { onMount } from "svelte";
   import UserDetails from "../components/UserDetails.svelte";
   import Layout from "./__layout.svelte";
@@ -82,7 +83,7 @@
     try {
       const response = await fetch(`https://api.lanyard.rest/v1/users/${ID}`);
       if (!response.ok) {
-        throw new Error("Failed to fetch data");
+        throw new Error("Failed to fetch data 😭");
       }
 
       const { data: responseData } = await response.json();
@@ -113,8 +114,7 @@
 
         socket.addEventListener("close", (event) => {
             console.log("WebSocket connection closed:", event.code, event.reason);
-            console.log("Reconnecting...");
-            // Automatically reconnect after a delay
+            console.log("Reconnecting my ass...");
             setTimeout(connectWebSocket, 1000);
         });
 
@@ -122,17 +122,16 @@
             const message = JSON.parse(event.data);
 
             if (message.op === 1) {
-                // Handle Hello message (Opcode 1)
-                // This message contains heartbeat_interval, but we're not using it in this example
+                
             } else if (message.op === 0) {
-                // Handle Event message (Opcode 0)
+               
                 if (message.t === "INIT_STATE") {
                     ManualFetch();
-                    // Here you can update your UI or perform other actions based on the received presence data
+                   
                 } else if (message.t === "PRESENCE_UPDATE") {
-                    // Handle PRESENCE_UPDATE event
+                  
                     data = message.d;
-                    // Here you can update your UI or perform other actions based on the received presence update
+                  
                 }
             }
         });
@@ -153,7 +152,7 @@ connectWebSocket();
 
   import { writable } from "svelte/store";
 
-  let activeTab = writable("activities");
+  let activeTab = writable("Activities");
 
   function setActiveTab(tab: string) {
     activeTab.set(tab);
@@ -175,22 +174,22 @@ connectWebSocket();
         >
           <div
             use:motion
-            class="flex flex-row items-center mt-[5px] bg-black/40 p-[5px] rounded-lg justify-center h-[44px]"
+            class="flex flex-row items-center mt-[15px] bg-black/40 p-[5px] rounded-lg justify-center h-[44px]"
           ></div>
         </Motion>
         <p>Fetching...</p>
       {:else if data && data.discord_user}
         <div
-          class="flex flex-row items-center mt-[5px] bg-black/40 p-[5px] rounded-lg justify-center"
+          class="flex flex-row items-center mt-[15px] bg-black/40 p-[5px] rounded-lg justify-center"
         >
-          <div class="space-x-3">
+          <div class="space-x-3 ">
             <ActivityButtons activeTab={$activeTab} {setActiveTab} />
           </div>
         </div>
 
-        <!---> Activities Tab <--->
+       
         <div>
-          {#if $activeTab === "activities"}
+          {#if $activeTab === "Activities"}
             <Motion
               let:motion
               variants={item}
@@ -213,10 +212,12 @@ connectWebSocket();
                 <Cards {data} />
               </div>
             </Motion>
+            {:else if $activeTab === "About"}
+            <About/>
           {/if}
         </div>
 
-        <!---> About Tab <--->
+        
       {:else}
         <p>Failed to fetch data</p>
       {/if}
@@ -229,7 +230,7 @@ connectWebSocket();
     <img
       class="fixed w-auto min-w-full min-h-full max-w-none blur-md object-contain"
       alt="bg"
-      src="https://cdn.discordapp.com/attachments/1183485427596939294/1211408751026905088/571613_qwertfx_attempt-at-pixel-art-745813473.gif?ex=65ee1751&is=65dba251&hm=afe9b7c1816b17376bf48f13ba1d2ccac065c3781b0c05bb739eb3ca46c77889&"
+      src=""
     />
   </div>
 </Layout>
