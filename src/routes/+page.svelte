@@ -219,6 +219,19 @@
   <div
     class="fixed top-0 left-0 w-full h-full -z-0 opacity-90 flex justify-center items-center "
   >
+  <svg class="fixed object-contain">
+     
+  <filter id='noiseFilter'>
+    <feTurbulence 
+      type='fractalNoise' 
+      baseFrequency='0.6' 
+      stitchTiles='stitch'/>
+     <feColorMatrix in="colorNoise" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0" />
+        <feComposite operator="in" in2="SourceGraphic" result="monoNoise"/>
+        <feBlend in="SourceGraphic" in2="monoNoise" mode="screen" />
+  </filter>
+  
+</svg>
     <svg
       class="fixed w-auto min-w-full min-h-full max-w-none blur-md object-contain animate-rotate slow-rotation"
       width="585"
@@ -255,7 +268,7 @@
     filter: blur(100px);
   }
   :root {
-    --color1: #29005a;
+    --color1: rgb(128, 61, 236);
     --color2: #ac38f0;
   }
   @keyframes rotate {

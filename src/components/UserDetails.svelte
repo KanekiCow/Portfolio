@@ -11,7 +11,7 @@
  <h1 class="ml-[20px] text-[#764ADE] roboto-regular"> <i class="fa-solid fa-caret-down overflow-hidden hover:rotate-[360deg] transition-all"/> ACTIVITIES</h1>
 <div class="flex flex-row items-center mb-[20px] bg-black/40 p-3 rounded-lg  mt-[20px] ">
  
-  <div class="flex flex-row items-center mb-[20px] bg-black/40 p-3 rounded-lg w-full mt-[20px]">
+  <div class="flex flex-row items-center mb-[20px] bg-black/40 p-3 rounded-lg w-full mt-[20px] ">
             <img
               src={"https://cdn.discordapp.com/avatars" +
                 "/" +
