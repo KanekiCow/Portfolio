@@ -5,6 +5,9 @@
 .jetbrain{
     font-family: "JetBrains Mono"
 }
+.roboto{
+    font-family: "Roboto"
+}
 .noise{
      filter: url(#noiseFilter);
 }

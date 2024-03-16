@@ -18,7 +18,7 @@
       cursorChar: "▐"
     });
     const typed2 = new Typed(c, {
-      strings: ["Information \n Hey there, I'm Kaneki Cat, passionate about bringing ideas to life. \n As a self-taught front-end web developer and UI/UX designer, I \n thrive on creating and seeing projects through. \n I've tackled diverse challenges both solo and with teams.\nMy toolkit includes: \n - LuaU for Roblox development \n - C# for .NET Windows Form and WPF apps \n - C++ \n - TypeScript/JavaScript \n - Firebase \n - Svelte \n - ReactJS \n - Tailwind CSS \n - HTML \n and I manage it all with Git, Yarn, and npm."],
+      strings: ["Hey there, I'm Kaneki Cat, passionate about bringing ideas to life. \n As a self-taught front-end web developer and UI/UX designer, I \n thrive on creating and seeing projects through. \n I've tackled diverse challenges both solo and with teams.\nMy toolkit includes: \n - LuaU for Roblox development \n - C# for .NET Windows Form and WPF apps \n - C++ \n - TypeScript/JavaScript \n - Firebase \n - Svelte \n - ReactJS \n - Tailwind CSS \n - HTML \n and I manage it all with Git, Yarn, and npm."],
       typeSpeed: 0.001,
       showCursor: false
     });
@@ -69,7 +69,7 @@
         use:motion
         class="flex flex-row items-center mb-[20px] bg-black/40 p-3 rounded-lg border-2 border-gray-600/40 backdrop-blur-sm"
       >
-        <span bind:this={c} class="text-gray-400 inline-block whitespace-pre w-auto jetbrain" />
+        <span bind:this={c} class="text-gray-400  w-auto jetbrain" />
       </div>
     </Motion>
   </div>
