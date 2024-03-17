@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ProjectCards from "./ProjectCards.svelte";
+  import ProjectCards from "../projects/ProjectCards.svelte";
   import { Motion } from "svelte-motion";
   const item = {
     hidden: { y: 20, opacity: 0 },
@@ -32,7 +32,7 @@
             { text: "Tailwind", color: "#033abd" },
           ]}
           buttonLinks={[
-            { label: "Source", url: "https://example.com/source" },
+            { label: "Source", url: "https://github.com/KanekiCow/Portfolio" },
             { label: "View", url: "https://example.com/view" },
           ]}
         />
@@ -56,8 +56,8 @@
             { text: "Tailwind", color: "#033abd" },
           ]}
           buttonLinks={[
-            { label: "Source", url: "https://example.com/source" },
-            { label: "View", url: "https://example.com/view" },
+            { label: "Source", url: "https://github.com/KanekiCow/The-Lions-Textile-Industries" },
+            { label: "View", url: "https://testing-kanekicow.vercel.app" },
           ]}
         />
       </div>
@@ -79,8 +79,8 @@
             { text: "Typescript", color: "#0087ff" },
           ]}
           buttonLinks={[
-            { label: "Source", url: "https://example.com/source" },
-            { label: "View", url: "https://example.com/view" },
+            { label: "Source", url: "https://github.com/KanekiCow/NekoGacha" },
+            { label: "View", url: "https://neko-gacha.vercel.app" },
           ]}
         />
       </div>
@@ -101,8 +101,31 @@
             { text: ".Net", color: "rgb(225, 41, 251)" },
           ]}
           buttonLinks={[
-            { label: "Source", url: "https://example.com/source" },
-            { label: "View", url: "https://example.com/view" },
+            { label: "Source", url: "https://github.com/KanekiCow/Valiant-Roblox-Executor" },
+          ]}
+        />
+      </div>
+    </Motion>
+ 
+     <Motion
+      let:motion
+      variants={item}
+      initial={{ y: 20, opacity: 0, filter: "blur(10px)" }}
+      animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+      transition={{ delay: 0.7 }}
+    >
+      <div use:motion>
+        <ProjectCards
+          headerText="Seiryu Roblox Executor Website"
+          descriptionText="A basic website made with HTML, Css and a bit of Js for a client."
+          tags={[
+            { text: "Css", color: "rgb(131, 80, 242)" },
+            { text: "HTML", color: "rgb(247, 174, 2)" },
+             { text: "JavaScript", color: "rgb(205, 247, 2)" },
+          ]}
+          buttonLinks={[
+            { label: "Source", url: "https://github.com/KanekiCow/Seiryu" },
+            { label: "View", url: "https://projectseiryu.vercel.app" },
           ]}
         />
       </div>

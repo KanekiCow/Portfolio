@@ -1,6 +1,6 @@
 <script lang="ts">
   import {Motion} from "svelte-motion"
-  import type { LanyardData } from "../routes/+page.svelte"
+  import type { LanyardData } from "../../routes/+page.svelte"
    export let data: LanyardData;
    function copy() {
     if (data != undefined)

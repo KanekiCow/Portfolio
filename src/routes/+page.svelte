@@ -62,13 +62,13 @@
 </script>
 
 <script lang="ts">
-  import Projects from "../components/Projects.svelte"
-  import About from "../components/About.svelte";
+  import Projects from "../components/pages/Projects.svelte"
+  import About from "../components/pages/About.svelte";
   import { onMount } from "svelte";
-  import UserDetails from "../components/UserDetails.svelte";
+  import UserDetails from "../components/pages/UserDetails.svelte";
   import Layout from "./+layout.svelte";
-  import ActivityButtons from "../components/ActivityButtons.svelte";
-  import Cards from "../components/Cards.svelte";
+  import ActivityButtons from "../components/header/ActivityButtons.svelte";
+  import Cards from "../components/details/Cards.svelte";
   import { Motion } from "svelte-motion";
 
   const item = {
@@ -158,7 +158,7 @@
 <Layout>
   <div class="relative z-10 w-full flex justify-center items-center">
     <div
-      class="bg-neutral-900/50 backdrop-blur-md px-0 min-[795px]:w-[60%] min-[795px]:px-[50px] w-[98%] h-[100vh] overflow-hidden"
+      class="bg-neutral-900/50 backdrop-blur-md px-0 min-[795px]:w-[60%] min-[795px]:px-[50px] w-[98%] h-[100vh] overflow-auto"
     >
       {#if loading}
         <Motion
