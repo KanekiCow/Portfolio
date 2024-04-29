@@ -63,6 +63,7 @@
 
 <script lang="ts">
   import Projects from "../components/pages/Projects.svelte"
+    import Contacts from "../components/pages/Contacts.svelte"
   import About from "../components/pages/About.svelte";
   import { onMount } from "svelte";
   import UserDetails from "../components/pages/UserDetails.svelte";
@@ -211,6 +212,8 @@
             <About />
             {:else if $activeTab === "Projects"}
             <Projects/>
+               {:else if $activeTab === "Contacts"}
+            <Contacts/>
           {/if}
         </div>
       {:else}
