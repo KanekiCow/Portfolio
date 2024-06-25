@@ -75,5 +75,15 @@
     </Motion>
   </div>
 </Motion>
+ <div class="p-5 bg-black/30 mt-[20px] rounded-lg ">
+  <h1 class="ml-[20px] text-[#764ADE] roboto-regular mb-5">
+      <i
+        class="fa-solid fa-caret-down overflow-hidden hover:rotate-[360deg] transition-all"
+      /> ABOUT MY MUSIC TASTE
+    </h1>
 
+<div class="mt-[15px] flex justify-center items-center">
 <SpotifyDetails/>
+</div>
+</div>
+ 
