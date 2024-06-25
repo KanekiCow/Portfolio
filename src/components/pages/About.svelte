@@ -2,6 +2,7 @@
   import { Motion } from "svelte-motion";
   import { onMount } from "svelte";
   import Typed from "typed.js";
+  import SpotifyDetails from "../details/SpotifyDetails.svelte";
 
   let element: HTMLElement;
   let c: HTMLElement;
@@ -74,3 +75,5 @@
     </Motion>
   </div>
 </Motion>
+
+<SpotifyDetails/>
