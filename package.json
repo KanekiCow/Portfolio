@@ -33,6 +33,7 @@
 		"@threlte/extras": "^8.10.3",
 		"three": "^0.162.0",
 		"typed.js": "^2.1.0",
-		"typed.ts": "^3.0.1"
+		"typed.ts": "^3.0.1",
+		"vanilla-tilt": "^1.8.1"
 	}
 }
